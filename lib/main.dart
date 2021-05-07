@@ -11,13 +11,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         textTheme: TextTheme(
-            body2: TextStyle(
-              fontSize: 12.0,
+            bodyText1: TextStyle(
+              fontSize: 14.0,
               color: Colors.black38,
               fontWeight: FontWeight.bold,
             ),
-            display1: TextStyle(
-                fontSize: 60.0,
+            headline4: TextStyle(
+                fontSize: 30.0,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)),
       ),
@@ -52,6 +52,33 @@ class HomeView extends StatelessWidget {
               icon: const Icon(CupertinoIcons.suit_diamond_fill),
               onPressed: null),
         ],
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(child: Icon(Icons.add), onPressed: null)
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'This is the text zone',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 23.0,
+                color: Colors.blueAccent,
+              ),
+            ),
+            Text(
+              '0',
+              style: Theme.of(context).textTheme.bodyText1,
+            )
+          ],
+        ),
       ),
     );
   }
