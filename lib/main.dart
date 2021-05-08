@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         textTheme: TextTheme(
             bodyText1: TextStyle(
-              fontSize: 14.0,
-              color: Colors.black38,
+              fontSize: 24.0,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
             headline4: TextStyle(
@@ -26,14 +26,50 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   final String title;
   HomeView({this.title});
+
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int _counter = 0;
+
+  void increase() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void decrease() {
+    setState(() {
+      if (_counter > 0) {
+        _counter--;
+      }
+    });
+  }
+
+  void refresh() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
+  List<Color> _color = [
+    Colors.blueAccent,
+    Colors.redAccent,
+    Colors.deepOrange,
+    Colors.deepPurpleAccent,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _color[_counter % _color.length],
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -56,7 +92,15 @@ class HomeView extends StatelessWidget {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton(child: Icon(Icons.add), onPressed: null)
+          FloatingActionButton(child: Icon(Icons.add), onPressed: increase),
+          SizedBox(
+            width: 10,
+          ),
+          FloatingActionButton(child: Icon(Icons.remove), onPressed: decrease),
+          SizedBox(
+            width: 10,
+          ),
+          FloatingActionButton(child: Icon(Icons.refresh), onPressed: refresh),
         ],
       ),
       body: Center(
@@ -74,7 +118,7 @@ class HomeView extends StatelessWidget {
               ),
             ),
             Text(
-              '0',
+              '$_counter',
               style: Theme.of(context).textTheme.bodyText1,
             )
           ],
