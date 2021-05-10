@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,116 +10,57 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         textTheme: TextTheme(
-            bodyText1: TextStyle(
-              fontSize: 24.0,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-            headline4: TextStyle(
-                fontSize: 30.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold)),
+          bodyText1: TextStyle(
+            color: Colors.blueAccent,
+            fontFamily: 'Arial',
+            fontSize: 20.0,
+          ),
+          headline2: TextStyle(
+              color: Colors.greenAccent,
+              fontSize: 30.0,
+              fontWeight: FontWeight.w300),
+        ),
       ),
-      home: HomeView(title: 'Time application'),
+      home: HomeView(title: 'This is Home View'),
     );
   }
 }
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   final String title;
   HomeView({this.title});
-
-  @override
-  _HomeViewState createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  int _counter = 0;
-
-  void increase() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void decrease() {
-    setState(() {
-      if (_counter > 0) {
-        _counter--;
-      }
-    });
-  }
-
-  void refresh() {
-    setState(() {
-      _counter = 0;
-    });
-  }
-
-  List<Color> _color = [
-    Colors.blueAccent,
-    Colors.redAccent,
-    Colors.deepOrange,
-    Colors.deepPurpleAccent,
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _color[_counter % _color.length],
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
         leading: Builder(
           builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
+            return IconButton(icon: const Icon(Icons.menu), onPressed: null);
           },
         ),
-        actions: <Widget>[
-          IconButton(
-              icon: const Icon(CupertinoIcons.suit_club), onPressed: null),
-          IconButton(
-              icon: const Icon(CupertinoIcons.suit_diamond_fill),
-              onPressed: null),
-        ],
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton(child: Icon(Icons.add), onPressed: increase),
+          FloatingActionButton(child: Icon(Icons.add), onPressed: null),
           SizedBox(
             width: 10,
           ),
-          FloatingActionButton(child: Icon(Icons.remove), onPressed: decrease),
+          FloatingActionButton(child: Icon(Icons.remove), onPressed: null),
           SizedBox(
             width: 10,
           ),
-          FloatingActionButton(child: Icon(Icons.refresh), onPressed: refresh),
+          FloatingActionButton(child: Icon(Icons.refresh), onPressed: null),
         ],
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'This is the text zone',
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 23.0,
-                color: Colors.blueAccent,
-              ),
-            ),
-            Text(
-              '$_counter',
+              'Tapped Button this many time:',
               style: Theme.of(context).textTheme.bodyText1,
-            )
+            ),
           ],
         ),
       ),
